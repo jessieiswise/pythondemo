@@ -9,18 +9,27 @@ from werkzeug.contrib.cache import SimpleCache
 cache = SimpleCache()
 
 
-def setDefaultCache():
-    default_dict = {
-        'name':'jessica',
-        'message':'hi! this is a test post!'
-    }
-    cache.add('0',default_dict)
-    cache.set('postCount',1)
 
-class routing_handler():
-    @staticmethod
-    @app.route('/static/<path:path>')
-    def staticFiles(path):
+
+class base_handler():
+    def setDefaultCache(self):
+        default_dict = {
+            'name':'jessica',
+            'message':'hi! this is a test post!'
+        }
+        cache.add('0',default_dict)
+        cache.set('postCount',1)
+
+
+class routing_handler(base_handler):
+    def warm_up(self):
+        self.setDefaultCache()
+        app.add_url_rule('/static/<path:path>', 'stc', self.staticFiles)
+        app.add_url_rule('/', 'home',self.home)
+        app.add_url_rule('/add', 'post',self.newEntry)
+        app.add_url_rule('/get', 'get',self.getEntries)
+        app.run()
+    def staticFiles(self,path):
         return send_from_directory('static',path)
     def home(self):
         return render_template('main.html')
@@ -47,9 +56,5 @@ class routing_handler():
             return json.dumps({'status':'failed'})
 
 if __name__ == '__main__':
-
     rtr = routing_handler()
-    app.add_url_rule('/', 'home',rtr.home)
-    app.add_url_rule('/add', 'post',rtr.newEntry)
-    app.add_url_rule('/get', 'get',rtr.getEntries)
-    app.run()
+    rtr.warm_up()
