@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <script   src="https://code.jquery.com/jquery-3.1.1.js"   integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="   crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <style>
+      *{font-family: 'Montserrat', sans-serif}
+      #header{
+        position:absolute;
+        width:100%;
+        background-color:#361736;
+        height:100px;
+        display:block
+      }
+      #header>div{display:inline-block}
+      body{display:block;margin:0;padding:0}
+      #imgofme{
+        background-image:url('static/me.jpg');
+        background-size: cover;
+        background-position: center;
+        border-radius: 200px;
+        width:90px;
+        height:90px;
+        padding: 5px;
+      }
+      #name{
+        float:right;
+        height:100%;
+        width:120px
+      }
+      #name span{
+        color:#fff;
+        display:block;
+        }
+      #name>#namespan{margin-top:55px;font-size:16px}
+      .contact{
+        color:white
+      }
+    </style>
+  </head>
+  <body>
+    <div id='header'>
+      <div id='imgofme'></div>
+
+      <div id='name'>
+        <span id='namespan'>
+          Jessica Wise
+        </span>
+        <span id='emailspan'>
+          <a class='contact' href='mailto:jessieiswise@gmail.com'>jessieiswise@</a>
+        </span>
+      </div>
+    </div>
+    <div id='content'></div>
+    <div id='footer'>
+      <div></div>
+    </div>
+    <script>
+    $( document ).ready(function() {
+      console.log( "ready!" );
+    });
+    </script>
+  </body>
+</html>
