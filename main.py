@@ -1,3 +1,7 @@
+import sys
+import os
+sys.path.append( os.path.dirname(__file__) +  'libs/' )
+
 from flask import Flask, render_template, make_response, request, Response, send_from_directory
 app = Flask(__name__, static_url_path='')
 import json
@@ -47,4 +51,5 @@ if __name__ == '__main__':
     rtr = routing_handler()
     app.add_url_rule('/', 'home',rtr.home)
     app.add_url_rule('/add', 'post',rtr.newEntry)
+    app.add_url_rule('/get', 'get',rtr.getEntries)
     app.run()
