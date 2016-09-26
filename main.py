@@ -10,7 +10,7 @@ def setDefaultCache():
         'name':'jessica',
         'message':'hi! this is a test post!'
     }
-    cache.set('0',default_dict)
+    cache.add('0',default_dict)
     cache.set('postCount',1)
 
 class routing_handler():
@@ -26,7 +26,8 @@ class routing_handler():
         data_formmatted = json.loads(data)
         try:
             current_count = cache.get('postCount')
-            cache.set(str(current_count + 1),data)
+            cache.add(str(current_count + 1),data)
+            cache.set('postCount',str(current_count + 1))
         except Exception as e:
             print(e)
             return json.dumps({'status':'failed'})
